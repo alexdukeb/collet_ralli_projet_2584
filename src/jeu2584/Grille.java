@@ -17,6 +17,7 @@ public class Grille implements Parametres {
     private final HashSet<Case> grille;
     private int valeurMax = 0;
     private boolean deplacement;
+    private boolean grille_terminee = false;
 
     public Grille() {
         this.grille = new HashSet<>();
@@ -71,6 +72,10 @@ public class Grille implements Parametres {
             }
         }
         return true;
+    }
+    
+    public boolean grilleTerminee() {
+        return this.grille_terminee;
     }
 
     public boolean lanceurDeplacerCases(int direction) {
@@ -200,12 +205,14 @@ public class Grille implements Parametres {
 
     public void victory() {
         System.out.println("Bravo ! Vous avez atteint " + this.valeurMax);
-        System.exit(0);
+        this.grille_terminee = true;
+        //System.exit(0);
     }
 
     public void gameOver() {
         System.out.println("La partie est finie. Votre score est " + this.valeurMax);
-        System.exit(1);
+        this.grille_terminee = true;
+        //System.exit(1);
     }
 
     public boolean nouvelleCase() {
