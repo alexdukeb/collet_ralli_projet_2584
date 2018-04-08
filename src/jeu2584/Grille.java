@@ -11,10 +11,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Random;
 
-/**
- *
- * @author Sylvain
- */
+
 public class Grille implements Parametres {
 
     private final HashSet<Case> grille;
@@ -66,7 +63,7 @@ public class Grille implements Parametres {
             for (Case c : this.grille) {
                 for (int i = 1; i <= 2; i++) {
                     if (c.getVoisinDirect(i) != null) {
-                        if (c.valeurEgale(c.getVoisinDirect(i))) {
+                        if (c.voisinFibo(c.getVoisinDirect(i))) {
                             return false;
                         }
                     }
@@ -97,9 +94,24 @@ public class Grille implements Parametres {
         }
         return deplacement;
     }
+    
+    private int fib(int index){
+        int result;
+        if(index == 0 || index == -1){
+            result = 1;
+        }
+        else {
+            result = fib(index - 1) + fib(index-2);
+        }
+        return result;
+    }
 
     private void fusion(Case c) {
-        c.setValeur(c.getValeur() * 2);
+        System.out.println("fusion");
+        c.setFibo_index(c.getFibo_index() + 1);
+        c.setValeur(fib(c.getFibo_index()));
+        
+        
         if (this.valeurMax < c.getValeur()) {
             this.valeurMax = c.getValeur();
         }
@@ -132,7 +144,12 @@ public class Grille implements Parametres {
             }
             Case voisin = extremites[rangee].getVoisinDirect(-direction);
             if (voisin != null) {
-                if (extremites[rangee].valeurEgale(voisin)) {
+                if (extremites[rangee].voisinFibo(voisin)) {
+                    if(extremites[rangee].getValeur() < voisin.getValeur()){
+                        extremites[rangee].setValeur(voisin.getValeur());
+                        extremites[rangee].setFibo_index(voisin.getFibo_index());
+                        System.out.println("ahoui");
+                    }
                     this.fusion(extremites[rangee]);
                     extremites[rangee] = voisin.getVoisinDirect(-direction);
                     this.grille.remove(voisin);
@@ -195,11 +212,12 @@ public class Grille implements Parametres {
         if (this.grille.size() < TAILLE * TAILLE) {
             ArrayList<Case> casesLibres = new ArrayList<>();
             Random ra = new Random();
-            int valeur = (1 + ra.nextInt(2)) * 2;
+            int valeur = (1 + ra.nextInt(2));
+            int fibo = valeur-1;
             // on crée toutes les cases encore libres
             for (int x = 0; x < TAILLE; x++) {
                 for (int y = 0; y < TAILLE; y++) {
-                    Case c = new Case(x, y, valeur);
+                    Case c = new Case(x, y, valeur, fibo);
                     if (!this.grille.contains(c)) { // contains utilise la méthode equals dans Case
                         casesLibres.add(c);
                     }
@@ -209,7 +227,7 @@ public class Grille implements Parametres {
             Case ajout = casesLibres.get(ra.nextInt(casesLibres.size()));
             ajout.setGrille(this);
             this.grille.add(ajout);
-            if ((this.grille.size() == 1) || (this.valeurMax == 2 && ajout.getValeur() == 4)) { // Mise à jour de la valeur maximale présente dans la grille si c'est la première case ajoutée ou si on ajoute un 4 et que l'ancien max était 2
+            if ((this.grille.size() == 1) || (this.valeurMax == 1 && ajout.getValeur() == 2)) { // Mise à jour de la valeur maximale présente dans la grille si c'est la première case ajoutée ou si on ajoute un 4 et que l'ancien max était 2
                 this.valeurMax = ajout.getValeur();
             }
             return true;

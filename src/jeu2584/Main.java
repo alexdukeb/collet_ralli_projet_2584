@@ -7,10 +7,7 @@ package jeu2584;
 
 import java.util.Scanner;
 
-/**
- *
- * @author Sylvain
- */
+
 public class Main implements Parametres {
 
     /**

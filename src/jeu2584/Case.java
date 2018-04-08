@@ -5,19 +5,17 @@
  */
 package jeu2584;
 
-/**
- *
- * @author Sylvain
- */
+
 public class Case implements Parametres {
 
-    private int x, y, valeur;
+    private int x, y, valeur, fibo_index;
     private Grille grille;
 
-    public Case(int abs, int ord, int v) {
+    public Case(int abs, int ord, int v, int fibo) {
         this.x = abs;
         this.y = ord;
         this.valeur = v;
+        this.fibo_index = fibo;
     }
 
     public void setGrille(Grille g) {
@@ -47,6 +45,10 @@ public class Case implements Parametres {
     public int getValeur() {
         return this.valeur;
     }
+    
+    public int getFibo_index() {
+        return this.fibo_index;
+    }
 
     @Override
     public boolean equals(Object obj) { // la méthode equals est utilisée lors de l'ajout d'une case à un ensemble pour vérifier qu'il n'y a pas de doublons (teste parmi tous les candidats qui ont le même hashcode)
@@ -66,6 +68,14 @@ public class Case implements Parametres {
     public boolean valeurEgale(Case c) {
         if (c != null) {
             return this.valeur == c.valeur;
+        } else {
+            return false;
+        }
+    }
+    
+    public boolean voisinFibo(Case c) {
+        if (c != null) {
+            return this.fibo_index == c.getFibo_index()-1 || this.fibo_index-1 == c.getFibo_index() || (this.fibo_index == 0 && c.getFibo_index() == 0);
         } else {
             return false;
         }
@@ -111,6 +121,10 @@ public class Case implements Parametres {
     @Override
     public String toString() {
         return "Case(" + this.x + "," + this.y + "," + this.valeur + ")";
+    }
+
+    public void setFibo_index(int i) {
+        this.fibo_index = i;
     }
 
 }
