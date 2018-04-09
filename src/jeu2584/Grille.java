@@ -48,6 +48,14 @@ public class Grille implements Parametres {
         result += "</html>";
         return result;
     }
+    
+    public int[][] toTab() {
+        int[][] tableau = new int[TAILLE][TAILLE];
+        for (Case c : this.grille) {
+            tableau[c.getY()][c.getX()] = c.getValeur();
+        }
+       return tableau;
+    }
 
     public HashSet<Case> getGrille() {
         return grille;
@@ -112,7 +120,6 @@ public class Grille implements Parametres {
     }
 
     private void fusion(Case c) {
-        System.out.println("fusion");
         c.setFibo_index(c.getFibo_index() + 1);
         c.setValeur(fib(c.getFibo_index()));
         
@@ -153,7 +160,6 @@ public class Grille implements Parametres {
                     if(extremites[rangee].getValeur() < voisin.getValeur()){
                         extremites[rangee].setValeur(voisin.getValeur());
                         extremites[rangee].setFibo_index(voisin.getFibo_index());
-                        System.out.println("ahoui");
                     }
                     this.fusion(extremites[rangee]);
                     extremites[rangee] = voisin.getVoisinDirect(-direction);
