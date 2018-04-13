@@ -23,6 +23,7 @@ public class Grille implements Parametres {
     public Grille() {
         this.grille = new HashSet<>();
     }
+    
 
     @Override
     public String toString() {

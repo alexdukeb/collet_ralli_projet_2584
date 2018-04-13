@@ -102,7 +102,7 @@ public class JeuFXMain extends Application {
         root.add(scoreJ2, 0, 2);
         
         Button btn = new Button();
-        btn.setText("Say 'Hello World'");
+        btn.setText("IA'");
         btn.setOnAction(new EventHandler<ActionEvent>() {
             
             @Override
