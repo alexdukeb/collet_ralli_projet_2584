@@ -16,6 +16,7 @@ public class Grille implements Parametres {
 
     private final HashSet<Case> grille;
     private int valeurMax = 0;
+    private int score = 0;
     private boolean deplacement;
     private boolean grille_terminee = false;
 
@@ -63,6 +64,10 @@ public class Grille implements Parametres {
 
     public int getValeurMax() {
         return valeurMax;
+    }
+    
+    public int getScore() {
+        return score;
     }
 
     public boolean partieFinie() {
@@ -123,7 +128,8 @@ public class Grille implements Parametres {
         return result;
     }
 
-    private void fusion(Case c) {
+    private void fusion(Case c, Case c2) {
+        this.score += c.getValeur() + c2.getValeur();
         c.setFibo_index(c.getFibo_index() + 1);
         c.setValeur(fib(c.getFibo_index()));
         
@@ -131,6 +137,7 @@ public class Grille implements Parametres {
         if (this.valeurMax < c.getValeur()) {
             this.valeurMax = c.getValeur();
         }
+        
         deplacement = true;
     }
 
@@ -166,7 +173,7 @@ public class Grille implements Parametres {
                             extremites[rangee].setValeur(voisin.getValeur());
                             extremites[rangee].setFibo_index(voisin.getFibo_index());
                         }
-                        this.fusion(extremites[rangee]);
+                        this.fusion(extremites[rangee], voisin);
                         extremites[rangee] = voisin.getVoisinDirect(-direction);
                         this.grille.remove(voisin);
                         this.deplacerCasesRecursif(extremites, rangee, direction, compteur + 1);
@@ -216,13 +223,13 @@ public class Grille implements Parametres {
     }
 
     public void victory() {
-        System.out.println("Bravo ! Vous avez atteint " + this.valeurMax);
+        System.out.println("Bravo ! Vous avez atteint " + this.score);
         this.grille_terminee = true;
         //System.exit(0);
     }
 
     public void gameOver() {
-        System.out.println("La partie est finie. Votre score est " + this.valeurMax);
+        System.out.println("La partie est finie. Votre score est " + this.score);
         this.grille_terminee = true;
         //System.exit(1);
     }

@@ -284,14 +284,14 @@ public class JeuFXMain extends Application {
                panelsJ1[x + y*4].setText(Integer.toString(tabG1[y][x]));
             }    
         }
-        scoreJ1.setText("Score J1 : " + Integer.toString(g.getValeurMax()));
+        scoreJ1.setText("Score J1 : " + Integer.toString(g.getScore()));
         
         for (int y = 0; y < tabG2.length; y++) {
             for (int x = 0; x < tabG2.length; x++) {
                panelsJ2[x + y*4].setText(Integer.toString(tabG2[y][x]));
             }    
         }
-        scoreJ2.setText("Score J2 : " + Integer.toString(g2.getValeurMax()));
+        scoreJ2.setText("Score J2 : " + Integer.toString(g2.getScore()));
         
         
         
