@@ -16,6 +16,7 @@ public class Grille implements Parametres {
 
     private final HashSet<Case> grille;
     private int valeurMax = 0;
+    private int score = 0;
     private boolean deplacement;
     private boolean grille_terminee = false;
 
@@ -64,6 +65,10 @@ public class Grille implements Parametres {
     public int getValeurMax() {
         return valeurMax;
     }
+    
+    public int getScore() {
+        return score;
+    }
 
     public boolean partieFinie() {
         if (this.grille.size() < TAILLE * TAILLE) {
@@ -80,6 +85,10 @@ public class Grille implements Parametres {
             }
         }
         return true;
+    }
+    
+    public void terminerGrille() {
+        this.grille_terminee = true;
     }
     
     public boolean grilleTerminee() {
@@ -119,7 +128,8 @@ public class Grille implements Parametres {
         return result;
     }
 
-    private void fusion(Case c) {
+    private void fusion(Case c, Case c2) {
+        this.score += c.getValeur() + c2.getValeur();
         c.setFibo_index(c.getFibo_index() + 1);
         c.setValeur(fib(c.getFibo_index()));
         
@@ -127,47 +137,50 @@ public class Grille implements Parametres {
         if (this.valeurMax < c.getValeur()) {
             this.valeurMax = c.getValeur();
         }
+        
         deplacement = true;
     }
 
     private void deplacerCasesRecursif(Case[] extremites, int rangee, int direction, int compteur) {
-        if (extremites[rangee] != null) {
-            if ((direction == HAUT && extremites[rangee].getY() != compteur)
-                    || (direction == BAS && extremites[rangee].getY() != TAILLE - 1 - compteur)
-                    || (direction == GAUCHE && extremites[rangee].getX() != compteur)
-                    || (direction == DROITE && extremites[rangee].getX() != TAILLE - 1 - compteur)) {
-                this.grille.remove(extremites[rangee]);
-                switch (direction) {
-                    case HAUT:
-                        extremites[rangee].setY(compteur);
-                        break;
-                    case BAS:
-                        extremites[rangee].setY(TAILLE - 1 - compteur);
-                        break;
-                    case GAUCHE:
-                        extremites[rangee].setX(compteur);
-                        break;
-                    default:
-                        extremites[rangee].setX(TAILLE - 1 - compteur);
-                        break;
-                }
-                this.grille.add(extremites[rangee]);
-                deplacement = true;
-            }
-            Case voisin = extremites[rangee].getVoisinDirect(-direction);
-            if (voisin != null) {
-                if (extremites[rangee].voisinFibo(voisin)) {
-                    if(extremites[rangee].getValeur() < voisin.getValeur()){
-                        extremites[rangee].setValeur(voisin.getValeur());
-                        extremites[rangee].setFibo_index(voisin.getFibo_index());
+        if(!grilleTerminee()){
+            if (extremites[rangee] != null) {
+                if ((direction == HAUT && extremites[rangee].getY() != compteur)
+                        || (direction == BAS && extremites[rangee].getY() != TAILLE - 1 - compteur)
+                        || (direction == GAUCHE && extremites[rangee].getX() != compteur)
+                        || (direction == DROITE && extremites[rangee].getX() != TAILLE - 1 - compteur)) {
+                    this.grille.remove(extremites[rangee]);
+                    switch (direction) {
+                        case HAUT:
+                            extremites[rangee].setY(compteur);
+                            break;
+                        case BAS:
+                            extremites[rangee].setY(TAILLE - 1 - compteur);
+                            break;
+                        case GAUCHE:
+                            extremites[rangee].setX(compteur);
+                            break;
+                        default:
+                            extremites[rangee].setX(TAILLE - 1 - compteur);
+                            break;
                     }
-                    this.fusion(extremites[rangee]);
-                    extremites[rangee] = voisin.getVoisinDirect(-direction);
-                    this.grille.remove(voisin);
-                    this.deplacerCasesRecursif(extremites, rangee, direction, compteur + 1);
-                } else {
-                    extremites[rangee] = voisin;
-                    this.deplacerCasesRecursif(extremites, rangee, direction, compteur + 1);
+                    this.grille.add(extremites[rangee]);
+                    deplacement = true;
+                }
+                Case voisin = extremites[rangee].getVoisinDirect(-direction);
+                if (voisin != null) {
+                    if (extremites[rangee].voisinFibo(voisin)) {
+                        if(extremites[rangee].getValeur() < voisin.getValeur()){
+                            extremites[rangee].setValeur(voisin.getValeur());
+                            extremites[rangee].setFibo_index(voisin.getFibo_index());
+                        }
+                        this.fusion(extremites[rangee], voisin);
+                        extremites[rangee] = voisin.getVoisinDirect(-direction);
+                        this.grille.remove(voisin);
+                        this.deplacerCasesRecursif(extremites, rangee, direction, compteur + 1);
+                    } else {
+                        extremites[rangee] = voisin;
+                        this.deplacerCasesRecursif(extremites, rangee, direction, compteur + 1);
+                    }
                 }
             }
         }
@@ -210,13 +223,13 @@ public class Grille implements Parametres {
     }
 
     public void victory() {
-        System.out.println("Bravo ! Vous avez atteint " + this.valeurMax);
+        System.out.println("Bravo ! Vous avez atteint " + this.score);
         this.grille_terminee = true;
         //System.exit(0);
     }
 
     public void gameOver() {
-        System.out.println("La partie est finie. Votre score est " + this.valeurMax);
+        System.out.println("La partie est finie. Votre score est " + this.score);
         this.grille_terminee = true;
         //System.exit(1);
     }
@@ -225,7 +238,8 @@ public class Grille implements Parametres {
         if (this.grille.size() < TAILLE * TAILLE) {
             ArrayList<Case> casesLibres = new ArrayList<>();
             Random ra = new Random();
-            int valeur = (1 + ra.nextInt(2));
+            int[] possibiliteValeur = {1,1,1,2};
+            int valeur = possibiliteValeur[ra.nextInt(4)];
             int fibo = valeur-1;
             // on crée toutes les cases encore libres
             for (int x = 0; x < TAILLE; x++) {
