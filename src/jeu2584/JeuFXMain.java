@@ -204,15 +204,15 @@ public class JeuFXMain extends Application {
                     if (b2) {
                         boolean b = g.nouvelleCase();
                         if (!b) {
-                            this.finPartieJ1("Perdu Joueur 1! Score = "+g.getValeurMax());
+                            this.finPartieJ1("Perdu Joueur 1! Score = "+g.getScore());
                         }
                     }
 
                     this.rafraichir();
                     if (g.getValeurMax() >= OBJECTIF) {
-                        this.finPartieJ1("Gagné Joueur 1! Score = "+g.getValeurMax());
+                        this.finPartieJ1("Gagné Joueur 1! Score = "+g.getScore());
                     }
-                    if (g.partieFinie()) this.finPartieJ1("Perdu Joueur 1! Score = "+g.getValeurMax());
+                    if (g.partieFinie()) this.finPartieJ1("Perdu Joueur 1! Score = "+g.getScore());
                 }
             }
             
@@ -222,15 +222,15 @@ public class JeuFXMain extends Application {
                     if (b2) {
                         boolean b = g.nouvelleCase();
                         if (!b) {
-                            this.finPartieJ1("Perdu Joueur 1! Score = "+g.getValeurMax());
+                            this.finPartieJ1("Perdu Joueur 1! Score = "+g.getScore());
                         }
                     }
 
                     this.rafraichir();
                     if (g.getValeurMax() >= OBJECTIF) {
-                        this.finPartieJ1("Gagné Joueur 1! Score = "+g.getValeurMax());
+                        this.finPartieJ1("Gagné Joueur 1! Score = "+g.getScore());
                     }
-                    if (g.partieFinie()) this.finPartieJ1("Perdu Joueur 1! Score = "+g.getValeurMax());
+                    if (g.partieFinie()) this.finPartieJ1("Perdu Joueur 1! Score = "+g.getScore());
                 }
             }
             
@@ -240,15 +240,15 @@ public class JeuFXMain extends Application {
                     if (b2) {
                         boolean b = g.nouvelleCase();
                         if (!b) {
-                            this.finPartieJ1("Perdu Joueur 1! Score = "+g.getValeurMax());
+                            this.finPartieJ1("Perdu Joueur 1! Score = "+g.getScore());
                         }
                     }
 
                     this.rafraichir();
                     if (g.getValeurMax() >= OBJECTIF) {
-                        this.finPartieJ1("Gagné Joueur 1! Score = "+g.getValeurMax());
+                        this.finPartieJ1("Gagné Joueur 1! Score = "+g.getScore());
                     }
-                    if (g.partieFinie()) this.finPartieJ1("Perdu Joueur 1! Score = "+g.getValeurMax());
+                    if (g.partieFinie()) this.finPartieJ1("Perdu Joueur 1! Score = "+g.getScore());
                 }
             }
             
@@ -258,15 +258,15 @@ public class JeuFXMain extends Application {
                     if (b2) {
                         boolean b = g.nouvelleCase();
                         if (!b) {
-                            this.finPartieJ1("Perdu Joueur 1! Score = "+g.getValeurMax());
+                            this.finPartieJ1("Perdu Joueur 1! Score = "+g.getScore());
                         }
                     }
 
                     this.rafraichir();
                     if (g.getValeurMax() >= OBJECTIF) {
-                        this.finPartieJ1("Gagné Joueur 1! Score = "+g.getValeurMax());
+                        this.finPartieJ1("Gagné Joueur 1! Score = "+g.getScore());
                     }
-                    if (g.partieFinie()) this.finPartieJ1("Perdu Joueur 1! Score = "+g.getValeurMax());
+                    if (g.partieFinie()) this.finPartieJ1("Perdu Joueur 1! Score = "+g.getScore());
                 }
             }
             
@@ -276,14 +276,14 @@ public class JeuFXMain extends Application {
                     if (b2) {
                         boolean b = g2.nouvelleCase();
                         if (!b) {
-                            this.finPartieJ2("Perdu Joueur 2! Score = "+g2.getValeurMax());
+                            this.finPartieJ2("Perdu Joueur 2! Score = "+g2.getScore());
                         }
                     }
                     this.rafraichir();
                     if (g2.getValeurMax() >= OBJECTIF) {
-                        this.finPartieJ2("Gagné Joueur 2 ! Score = "+g2.getValeurMax());
+                        this.finPartieJ2("Gagné Joueur 2 ! Score = "+g2.getScore());
                     }
-                    if (g2.partieFinie()) this.finPartieJ2("Perdu Joueur 2 ! Score = "+g2.getValeurMax());
+                    if (g2.partieFinie()) this.finPartieJ2("Perdu Joueur 2 ! Score = "+g2.getScore());
                 }
             }
             if (e.getCode() == KeyCode.LEFT) {
@@ -292,14 +292,14 @@ public class JeuFXMain extends Application {
                     if (b2) {
                         boolean b = g2.nouvelleCase();
                         if (!b) {
-                            this.finPartieJ2("Perdu Joueur 2! Score = "+g2.getValeurMax());
+                            this.finPartieJ2("Perdu Joueur 2! Score = "+g2.getScore());
                         }
                     }
                     this.rafraichir();
                     if (g2.getValeurMax() >= OBJECTIF) {
-                        this.finPartieJ2("Gagné Joueur 2 ! Score = "+g2.getValeurMax());
+                        this.finPartieJ2("Gagné Joueur 2 ! Score = "+g2.getScore());
                     }
-                    if (g2.partieFinie()) this.finPartieJ2("Perdu Joueur 2 ! Score = "+g2.getValeurMax());
+                    if (g2.partieFinie()) this.finPartieJ2("Perdu Joueur 2 ! Score = "+g2.getScore());
                 }
             }
             if (e.getCode() == KeyCode.DOWN) {
@@ -308,14 +308,14 @@ public class JeuFXMain extends Application {
                     if (b2) {
                         boolean b = g2.nouvelleCase();
                         if (!b) {
-                            this.finPartieJ2("Perdu Joueur 2! Score = "+g2.getValeurMax());
+                            this.finPartieJ2("Perdu Joueur 2! Score = "+g2.getScore());
                         }
                     }
                     this.rafraichir();
                     if (g2.getValeurMax() >= OBJECTIF) {
-                        this.finPartieJ2("Gagné Joueur 2 ! Score = "+g2.getValeurMax());
+                        this.finPartieJ2("Gagné Joueur 2 ! Score = "+g2.getScore());
                     }
-                    if (g2.partieFinie()) this.finPartieJ2("Perdu Joueur 2 ! Score = "+g2.getValeurMax());
+                    if (g2.partieFinie()) this.finPartieJ2("Perdu Joueur 2 ! Score = "+g2.getScore());
                 }
             }
             if (e.getCode() == KeyCode.RIGHT) {
@@ -324,14 +324,14 @@ public class JeuFXMain extends Application {
                     if (b2) {
                         boolean b = g2.nouvelleCase();
                         if (!b) {
-                            this.finPartieJ2("Perdu Joueur 2! Score = "+g2.getValeurMax());
+                            this.finPartieJ2("Perdu Joueur 2! Score = "+g2.getScore());
                         }
                     }
                     this.rafraichir();
                     if (g2.getValeurMax() >= OBJECTIF) {
-                        this.finPartieJ2("Gagné Joueur 2 ! Score = "+g2.getValeurMax());
+                        this.finPartieJ2("Gagné Joueur 2 ! Score = "+g2.getScore());
                     }
-                    if (g2.partieFinie()) this.finPartieJ2("Perdu Joueur 2 ! Score = "+g2.getValeurMax());
+                    if (g2.partieFinie()) this.finPartieJ2("Perdu Joueur 2 ! Score = "+g2.getScore());
                 }
             }
         });
