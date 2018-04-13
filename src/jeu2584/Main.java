@@ -5,6 +5,7 @@
  */
 package jeu2584;
 
+import java.util.Random;
 import java.util.Scanner;
 
 
@@ -29,10 +30,11 @@ public class Main implements Parametres {
         bg2 = g2.nouvelleCase();
         System.out.println("Grille joueur 2 :");
         System.out.println(g2);
-        
+        System.out.println("Voulez-vous que le j1 soit une intelligence artificielle aléatoire O/N");
+        Scanner sc0=new Scanner(System.in);
+        String ia=sc0.nextLine();
         joueurs[0] = g;
         joueurs[1] = g2;
-        
         Scanner sc = new Scanner(System.in);
         /*System.out.println("X:");
         int x= sc.nextInt();
@@ -46,7 +48,7 @@ public class Main implements Parametres {
         
         while (!(g.grilleTerminee() && g2.grilleTerminee())) {
             for(int i = 0; i < 2; i++ ){
-                if(!joueurs[i].grilleTerminee()){
+                if(!joueurs[i].grilleTerminee() && (ia.equals("N") || (i==1))){
                     System.out.println("JOUEUR " + (i+1));
                     System.out.println("Déplacer vers la Droite (d), Gauche (g), Haut (h), ou Bas (b) ?");
                     String s = sc.nextLine();
@@ -76,6 +78,35 @@ public class Main implements Parametres {
                         if (joueurs[i].getValeurMax()>=OBJECTIF) joueurs[i].victory();
                         if (joueurs[i].partieFinie()) joueurs[i].gameOver();
                     }
+                }
+                else if(ia.equals("O")&& i==0){
+                    System.out.println("JOUEUR " + (i+1));
+                    Random ra = new Random();
+                    int valeur = ra.nextInt(4);
+                    int direction = 0;
+                    if(valeur==0){
+                        direction= DROITE;
+                    }
+                    if(valeur==1){
+                        direction= GAUCHE;
+                    }
+                    if(valeur==2){
+                        direction= BAS;
+                    }
+                    if (valeur==3){
+                        direction= HAUT;
+                    }
+                    else{
+                    }
+                    System.out.println(valeur);
+                    boolean b2 = joueurs[i].lanceurDeplacerCases(direction);
+                    if (b2) {
+                        b = joueurs[i].nouvelleCase();
+                            if (!b) joueurs[i].gameOver();
+                        }
+                        System.out.println(joueurs[i]);
+                        if (joueurs[i].getValeurMax()>=OBJECTIF) joueurs[i].victory();
+                        if (joueurs[i].partieFinie()) joueurs[i].gameOver();
                 }
                 else
                    System.out.println("Joeuur " + (i+1) + ", votre grille est terminee.");
