@@ -5,7 +5,6 @@
  */
 package jeu2584;
 
-import java.util.HashSet;
 
 /**
  *

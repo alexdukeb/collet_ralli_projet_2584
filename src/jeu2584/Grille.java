@@ -19,11 +19,15 @@ public class Grille implements Parametres {
     private int score = 0;
     private boolean deplacement;
     private boolean grille_terminee = false;
+    private boolean joue = false;
 
     public Grille() {
         this.grille = new HashSet<>();
     }
     
+    public boolean joue() {
+        return this.joue;
+    }
 
     @Override
     public String toString() {
@@ -263,4 +267,6 @@ public class Grille implements Parametres {
             return false;
         }
     }
+
+
 }
