@@ -28,6 +28,10 @@ public class Grille implements Parametres {
     public boolean joue() {
         return this.joue;
     }
+    
+    public void setJoue(boolean b) {
+        this.joue = b;
+    }
 
     @Override
     public String toString() {

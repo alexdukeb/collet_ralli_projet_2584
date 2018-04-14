@@ -24,10 +24,12 @@ public class IAAleatoire extends Grille{
         super();
     }
     
-    public void tourIA(){}{
+    public boolean tourIA(){
+        boolean deplacement = true;
         Random ra = new Random();
         int valeur = ra.nextInt(4);
         int direction = 0;
+        
         if(valeur==0){
             direction= DROITE;
         }
@@ -42,17 +44,32 @@ public class IAAleatoire extends Grille{
         }
         else{
         }
-        boolean b2 = this.lanceurDeplacerCases(direction);
-        if (b2) {
-            boolean b = this.nouvelleCase();
-                if (!b) this.gameOver();
+        
+        while(!this.lanceurDeplacerCases(direction)){
+            valeur = ra.nextInt(4);
+            if(valeur==0){
+                direction= DROITE;
             }
-        System.out.println(this);
-        if (this.getValeurMax()>=OBJECTIF) this.victory();
-        if (this.partieFinie()) this.gameOver();
-            
-    
+            if(valeur==1){
+                direction= GAUCHE;
+            }
+            if(valeur==2){
+                direction= BAS;
+            }
+            if (valeur==3){
+                direction= HAUT;
+            }
+            else{
+            }
+        }
+        
+        boolean b = this.nouvelleCase();
+        if (!b) deplacement = false;
+        
+        
+        return deplacement;
     
     }
+    
     
 }

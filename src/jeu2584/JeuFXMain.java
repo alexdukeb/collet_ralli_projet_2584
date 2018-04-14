@@ -102,8 +102,8 @@ public class JeuFXMain extends Application {
             
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("test");
                 g = new Grille();
+                g.setJoue(true);
                 boolean bg = g.nouvelleCase();
                 bg = g.nouvelleCase();
                 btn.setVisible(false);
@@ -127,6 +127,7 @@ public class JeuFXMain extends Application {
                 btn2.setVisible(false);
                 btn3.setVisible(true);
                 btn4.setVisible(true);
+                System.out.println("IaPerd");
             }
         });
         
@@ -141,6 +142,7 @@ public class JeuFXMain extends Application {
                 bg = g2.nouvelleCase();
                 btn3.setVisible(false);
                 btn4.setVisible(false);
+                g2.setJoue(true);
                 rafraichir();
             }
         });
@@ -199,139 +201,243 @@ public class JeuFXMain extends Application {
         //key pressed
         scene.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.Z) {
-                if(!g.grilleTerminee() && g.joue()){
-                    boolean b2 = g.lanceurDeplacerCases(HAUT);
-                    if (b2) {
-                        boolean b = g.nouvelleCase();
-                        if (!b) {
-                            this.finPartieJ1("Perdu Joueur 1! Score = "+g.getScore());
+                if(!j1iaperdante){
+                    if(!g.grilleTerminee() && g.joue()){
+                        boolean b2 = g.lanceurDeplacerCases(HAUT);
+                        if (b2) {
+                            boolean b = g.nouvelleCase();
+                            if (!b) {
+                                this.finPartieJ1("Perdu Joueur 1! Score = "+g.getScore());
+                            }
                         }
-                    }
 
-                    this.rafraichir();
-                    if (g.getValeurMax() >= OBJECTIF) {
-                        this.finPartieJ1("Gagné Joueur 1! Score = "+g.getScore());
+                        this.rafraichir();
+                        if (g.getValeurMax() >= OBJECTIF) {
+                            this.finPartieJ1("Gagné Joueur 1! Score = "+g.getScore());
+                        }
+                        if (g.partieFinie()) this.finPartieJ1("Perdu Joueur 1! Score = "+g.getScore());
+                        g.setJoue(false);
+                        if (j2iaaleatoire) {
+                            if(!iaaleatoire.grilleTerminee()){
+                                boolean tourIa = iaaleatoire.tourIA();
+                                if (!tourIa) {
+                                    this.finPartieIAAleatoire("Perdu IA aleatoire ! Score = " + iaaleatoire.getScore());
+                                }
+                                this.rafraichir();
+                                if (iaaleatoire.getValeurMax() >= OBJECTIF) {
+                                    this.finPartieIAAleatoire("Gagné IA aleatoire! Score = "+iaaleatoire.getScore());
+                                }
+                                if (iaaleatoire.partieFinie()) this.finPartieJ1("Perdu IA aleatoire! Score = "+iaaleatoire.getScore());
+                                g.setJoue(true);
+                            }
+                        }
+                        else g2.setJoue(true);
                     }
-                    if (g.partieFinie()) this.finPartieJ1("Perdu Joueur 1! Score = "+g.getScore());
                 }
             }
             
             if (e.getCode() == KeyCode.Q) {
-                if(!g.grilleTerminee() && g.joue()){
-                    boolean b2 = g.lanceurDeplacerCases(GAUCHE);
-                    if (b2) {
-                        boolean b = g.nouvelleCase();
-                        if (!b) {
-                            this.finPartieJ1("Perdu Joueur 1! Score = "+g.getScore());
+                if(!j1iaperdante){
+                    if(!g.grilleTerminee() && g.joue()){
+                        boolean b2 = g.lanceurDeplacerCases(GAUCHE);
+                        if (b2) {
+                            boolean b = g.nouvelleCase();
+                            if (!b) {
+                                this.finPartieJ1("Perdu Joueur 1! Score = "+g.getScore());
+                            }
                         }
-                    }
 
-                    this.rafraichir();
-                    if (g.getValeurMax() >= OBJECTIF) {
-                        this.finPartieJ1("Gagné Joueur 1! Score = "+g.getScore());
+                        this.rafraichir();
+                        if (g.getValeurMax() >= OBJECTIF) {
+                            this.finPartieJ1("Gagné Joueur 1! Score = "+g.getScore());
+                        }
+                        if (g.partieFinie()) this.finPartieJ1("Perdu Joueur 1! Score = "+g.getScore());
+                        g.setJoue(false);
+                        if (j2iaaleatoire) {
+                            if(!iaaleatoire.grilleTerminee()){
+                                boolean tourIa = iaaleatoire.tourIA();
+                                if (!tourIa) {
+                                    this.finPartieIAAleatoire("Perdu IA aleatoire ! Score = " + iaaleatoire.getScore());
+                                }
+                                this.rafraichir();
+                                if (iaaleatoire.getValeurMax() >= OBJECTIF) {
+                                    this.finPartieIAAleatoire("Gagné IA aleatoire! Score = "+iaaleatoire.getScore());
+                                }
+                                if (iaaleatoire.partieFinie()) this.finPartieJ1("Perdu IA aleatoire! Score = "+iaaleatoire.getScore());
+                                g.setJoue(true);
+                            }
+                        }
+                        else g2.setJoue(true);
                     }
-                    if (g.partieFinie()) this.finPartieJ1("Perdu Joueur 1! Score = "+g.getScore());
                 }
             }
             
             if (e.getCode() == KeyCode.S) {
-                if(!g.grilleTerminee() && g.joue()){
-                    boolean b2 = g.lanceurDeplacerCases(BAS);
-                    if (b2) {
-                        boolean b = g.nouvelleCase();
-                        if (!b) {
-                            this.finPartieJ1("Perdu Joueur 1! Score = "+g.getScore());
+                if(!j1iaperdante){
+                    if(!g.grilleTerminee() && g.joue()){
+                        boolean b2 = g.lanceurDeplacerCases(BAS);
+                        if (b2) {
+                            boolean b = g.nouvelleCase();
+                            if (!b) {
+                                this.finPartieJ1("Perdu Joueur 1! Score = "+g.getScore());
+                            }
                         }
-                    }
 
-                    this.rafraichir();
-                    if (g.getValeurMax() >= OBJECTIF) {
-                        this.finPartieJ1("Gagné Joueur 1! Score = "+g.getScore());
+                        this.rafraichir();
+                        if (g.getValeurMax() >= OBJECTIF) {
+                            this.finPartieJ1("Gagné Joueur 1! Score = "+g.getScore());
+                        }
+                        if (g.partieFinie()) this.finPartieJ1("Perdu Joueur 1! Score = "+g.getScore());
+                        g.setJoue(false);
+                        if (j2iaaleatoire) {
+                            if(!iaaleatoire.grilleTerminee()){
+                                boolean tourIa = iaaleatoire.tourIA();
+                                if (!tourIa) {
+                                    this.finPartieIAAleatoire("Perdu IA aleatoire ! Score = " + iaaleatoire.getScore());
+                                }
+                                this.rafraichir();
+                                if (iaaleatoire.getValeurMax() >= OBJECTIF) {
+                                    this.finPartieIAAleatoire("Gagné IA aleatoire! Score = "+iaaleatoire.getScore());
+                                }
+                                if (iaaleatoire.partieFinie()) this.finPartieJ1("Perdu IA aleatoire! Score = "+iaaleatoire.getScore());
+                                g.setJoue(true);
+                            }
+                        }
+                        else g2.setJoue(true);
                     }
-                    if (g.partieFinie()) this.finPartieJ1("Perdu Joueur 1! Score = "+g.getScore());
                 }
             }
             
             if (e.getCode() == KeyCode.D) {
-                if(!g.grilleTerminee() && g.joue()){
-                    boolean b2 = g.lanceurDeplacerCases(DROITE);
-                    if (b2) {
-                        boolean b = g.nouvelleCase();
-                        if (!b) {
-                            this.finPartieJ1("Perdu Joueur 1! Score = "+g.getScore());
+                if(!j1iaperdante){
+                    if(!g.grilleTerminee() && g.joue()){
+                        boolean b2 = g.lanceurDeplacerCases(DROITE);
+                        if (b2) {
+                            boolean b = g.nouvelleCase();
+                            if (!b) {
+                                this.finPartieJ1("Perdu Joueur 1! Score = "+g.getScore());
+                            }
                         }
-                    }
 
-                    this.rafraichir();
-                    if (g.getValeurMax() >= OBJECTIF) {
-                        this.finPartieJ1("Gagné Joueur 1! Score = "+g.getScore());
+                        this.rafraichir();
+                        if (g.getValeurMax() >= OBJECTIF) {
+                            this.finPartieJ1("Gagné Joueur 1! Score = "+g.getScore());
+                        }
+                        if (g.partieFinie()) this.finPartieJ1("Perdu Joueur 1! Score = "+g.getScore());
+                        g.setJoue(false);
+                        if (j2iaaleatoire) {
+                            if(!iaaleatoire.grilleTerminee()){
+                                boolean tourIa = iaaleatoire.tourIA();
+                                if (!tourIa) {
+                                    this.finPartieIAAleatoire("Perdu IA aleatoire ! Score = " + iaaleatoire.getScore());
+                                }
+                                this.rafraichir();
+                                if (iaaleatoire.getValeurMax() >= OBJECTIF) {
+                                    this.finPartieIAAleatoire("Gagné IA aleatoire! Score = "+iaaleatoire.getScore());
+                                }
+                                if (iaaleatoire.partieFinie()) this.finPartieJ1("Perdu IA aleatoire! Score = "+iaaleatoire.getScore());
+                                g.setJoue(true);
+                            }
+                        }
+                        else g2.setJoue(true);
                     }
-                    if (g.partieFinie()) this.finPartieJ1("Perdu Joueur 1! Score = "+g.getScore());
                 }
             }
             
             if (e.getCode() == KeyCode.UP) {
-                if(!g2.grilleTerminee() && g2.joue()){
-                    boolean b2 = g2.lanceurDeplacerCases(HAUT);
-                    if (b2) {
-                        boolean b = g2.nouvelleCase();
-                        if (!b) {
-                            this.finPartieJ2("Perdu Joueur 2! Score = "+g2.getScore());
+                if(!j2iaaleatoire){
+                    if(!g2.grilleTerminee() && g2.joue()){
+                        boolean b2 = g2.lanceurDeplacerCases(HAUT);
+                        if (b2) {
+                            boolean b = g2.nouvelleCase();
+                            if (!b) {
+                                this.finPartieJ2("Perdu Joueur 2! Score = "+g2.getScore());
+                            }
                         }
+                        this.rafraichir();
+                        if (g2.getValeurMax() >= OBJECTIF) {
+                            this.finPartieJ2("Gagné Joueur 2 ! Score = "+g2.getScore());
+                        }
+                        if (g2.partieFinie()) this.finPartieJ2("Perdu Joueur 2 ! Score = "+g2.getScore());
+                        g2.setJoue(false);
+                        if (j1iaperdante) {
+                            System.out.println("Tour IAPerdante");
+                            g2.setJoue(true);
+                        }
+                        else g.setJoue(true);
                     }
-                    this.rafraichir();
-                    if (g2.getValeurMax() >= OBJECTIF) {
-                        this.finPartieJ2("Gagné Joueur 2 ! Score = "+g2.getScore());
-                    }
-                    if (g2.partieFinie()) this.finPartieJ2("Perdu Joueur 2 ! Score = "+g2.getScore());
                 }
             }
             if (e.getCode() == KeyCode.LEFT) {
-                if(!g2.grilleTerminee() && g2.joue()){
-                    boolean b2 = g2.lanceurDeplacerCases(GAUCHE);
-                    if (b2) {
-                        boolean b = g2.nouvelleCase();
-                        if (!b) {
-                            this.finPartieJ2("Perdu Joueur 2! Score = "+g2.getScore());
+                if(!j2iaaleatoire){
+                    if(!g2.grilleTerminee() && g2.joue()){
+                        boolean b2 = g2.lanceurDeplacerCases(GAUCHE);
+                        if (b2) {
+                            boolean b = g2.nouvelleCase();
+                            if (!b) {
+                                this.finPartieJ2("Perdu Joueur 2! Score = "+g2.getScore());
+                            }
                         }
+                        this.rafraichir();
+                        if (g2.getValeurMax() >= OBJECTIF) {
+                            this.finPartieJ2("Gagné Joueur 2 ! Score = "+g2.getScore());
+                        }
+                        if (g2.partieFinie()) this.finPartieJ2("Perdu Joueur 2 ! Score = "+g2.getScore());
+                        g2.setJoue(false);
+                        if (j1iaperdante) {
+                            System.out.println("Tour IAPerdante");
+                            g2.setJoue(true);
+                        }
+                        else g.setJoue(true);
                     }
-                    this.rafraichir();
-                    if (g2.getValeurMax() >= OBJECTIF) {
-                        this.finPartieJ2("Gagné Joueur 2 ! Score = "+g2.getScore());
-                    }
-                    if (g2.partieFinie()) this.finPartieJ2("Perdu Joueur 2 ! Score = "+g2.getScore());
                 }
             }
             if (e.getCode() == KeyCode.DOWN) {
-                if(!g2.grilleTerminee() && g2.joue()){
-                    boolean b2 = g2.lanceurDeplacerCases(BAS);
-                    if (b2) {
-                        boolean b = g2.nouvelleCase();
-                        if (!b) {
-                            this.finPartieJ2("Perdu Joueur 2! Score = "+g2.getScore());
+                if(!j2iaaleatoire){
+                    if(!g2.grilleTerminee() && g2.joue()){
+                        boolean b2 = g2.lanceurDeplacerCases(BAS);
+                        if (b2) {
+                            boolean b = g2.nouvelleCase();
+                            if (!b) {
+                                this.finPartieJ2("Perdu Joueur 2! Score = "+g2.getScore());
+                            }
                         }
+                        this.rafraichir();
+                        if (g2.getValeurMax() >= OBJECTIF) {
+                            this.finPartieJ2("Gagné Joueur 2 ! Score = "+g2.getScore());
+                        }
+                        if (g2.partieFinie()) this.finPartieJ2("Perdu Joueur 2 ! Score = "+g2.getScore());
+                        g2.setJoue(false);
+                        if (j1iaperdante) {
+                            System.out.println("Tour IAPerdante");
+                            g2.setJoue(true);
+                        }
+                        else g.setJoue(true);
                     }
-                    this.rafraichir();
-                    if (g2.getValeurMax() >= OBJECTIF) {
-                        this.finPartieJ2("Gagné Joueur 2 ! Score = "+g2.getScore());
-                    }
-                    if (g2.partieFinie()) this.finPartieJ2("Perdu Joueur 2 ! Score = "+g2.getScore());
                 }
             }
             if (e.getCode() == KeyCode.RIGHT) {
-                if(!g2.grilleTerminee() && g2.joue()){
-                    boolean b2 = g2.lanceurDeplacerCases(DROITE);
-                    if (b2) {
-                        boolean b = g2.nouvelleCase();
-                        if (!b) {
-                            this.finPartieJ2("Perdu Joueur 2! Score = "+g2.getScore());
+                if(!j2iaaleatoire){
+                    if(!g2.grilleTerminee() && g2.joue()){
+                        boolean b2 = g2.lanceurDeplacerCases(DROITE);
+                        if (b2) {
+                            boolean b = g2.nouvelleCase();
+                            if (!b) {
+                                this.finPartieJ2("Perdu Joueur 2! Score = "+g2.getScore());
+                            }
                         }
+                        this.rafraichir();
+                        if (g2.getValeurMax() >= OBJECTIF) {
+                            this.finPartieJ2("Gagné Joueur 2 ! Score = "+g2.getScore());
+                        }
+                        if (g2.partieFinie()) this.finPartieJ2("Perdu Joueur 2 ! Score = "+g2.getScore());
+                        g2.setJoue(false);
+                        if (j1iaperdante) {
+                            System.out.println("Tour IAPerdante");
+                            g2.setJoue(true);
+                        }
+                        else g.setJoue(true);
                     }
-                    this.rafraichir();
-                    if (g2.getValeurMax() >= OBJECTIF) {
-                        this.finPartieJ2("Gagné Joueur 2 ! Score = "+g2.getScore());
-                    }
-                    if (g2.partieFinie()) this.finPartieJ2("Perdu Joueur 2 ! Score = "+g2.getScore());
                 }
             }
         });
@@ -352,8 +458,6 @@ public class JeuFXMain extends Application {
             
     
     private void rafraichir() {
-        System.out.print(g);
-        System.out.print(g2);
         int[][] tabG1;
         int[][] tabG2;
         if(j1iaperdante){
@@ -398,6 +502,11 @@ public class JeuFXMain extends Application {
         resultat.setText(resultat.getText() + "\n" + message + "\n");
         g2.terminerGrille();
     }
+    
+    private void finPartieIAAleatoire(String message) {
+        resultat.setText(resultat.getText() + "\n" + message + "\n");
+        iaaleatoire.terminerGrille();
+    }
 
     /**
      * @param args the command line arguments
@@ -405,10 +514,7 @@ public class JeuFXMain extends Application {
     public static void main(String[] args) {      
         
         launch(args);
-        
-        
-        
-        
+          
     }
     
 }
