@@ -231,17 +231,6 @@ public class Grille implements Parametres {
         return result;
     }
 
-    public void victory() {
-        System.out.println("Bravo ! Vous avez atteint " + this.score);
-        this.grille_terminee = true;
-        //System.exit(0);
-    }
-
-    public void gameOver() {
-        System.out.println("La partie est finie. Votre score est " + this.score);
-        this.grille_terminee = true;
-        //System.exit(1);
-    }
 
     public boolean nouvelleCase() {
         if (this.grille.size() < TAILLE * TAILLE) {

@@ -40,11 +40,11 @@ public class IAPerdante extends Grille{
         }
         else if (b2) {
             boolean b = this.nouvelleCase();
-                if (!b) this.gameOver();
+                //if (!b) this.gameOver();
             }
         System.out.println(this);
-        if (this.getValeurMax()>=OBJECTIF) this.victory();
-        if (this.partieFinie()) this.gameOver();
+        //if (this.getValeurMax()>=OBJECTIF) this.victory();
+        //if (this.partieFinie()) this.gameOver();
     
     
     }

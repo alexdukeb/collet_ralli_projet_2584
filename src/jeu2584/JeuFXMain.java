@@ -47,18 +47,7 @@ public class JeuFXMain extends Application {
     @Override
     public void start(Stage primaryStage) {
          
-        Button btnJ1 = new Button();
-        btnJ1.setText("Joueur 1'");
-        btnJ1.setOnAction((ActionEvent event) -> {
-            System.out.println("Hello World!");
-        });
-        
-        
-        
-        
-        
-        
-        
+     
         GridPane gridpaneJ1 = new GridPane();
         //gridpaneJ1.setPadding(new Insets(5));
         gridpaneJ1.setStyle( "-fx-background-color:blue;" );
@@ -126,8 +115,7 @@ public class JeuFXMain extends Application {
                 btn.setVisible(false);
                 btn2.setVisible(false);
                 btn3.setVisible(true);
-                btn4.setVisible(true);
-                System.out.println("IaPerd");
+               
             }
         });
         
